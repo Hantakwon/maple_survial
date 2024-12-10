@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mapper.ScoreMapper">
+
+	<select id="listScore" resultType="ScoreDO">
+		SELECT * FROM SCORE ORDER BY id ASC
+	</select>
+	
+	<select id="listCharacterScore" parameterType="String" resultType="ScoreDO">
+		SELECT * FROM SCORE WHERE id=#{id} AND character=#{character} ORDER BY score DESC FETCH FIRST 10 ROWS ONLY
+	</select>
+ 
+	<select id="getScore" parameterType="String" resultType="ScoreDO">
+		SELECT * FROM SCORE WHERE id=#{id}
+	</select>
+
+	<select id="getCharacterScore" parameterType="String" resultType="ScoreDO">
+		SELECT * FROM SCORE WHERE id=#{id} AND character=#{character}
+	</select>
+	
+	<insert id="insertScore" parameterType="ScoreDO">
+		INSERT INTO SCORE(id, character, score) VALUES(#{id}, #{character}, #{score})
+	</insert>
+
+	<update id="updateScore" parameterType="ScoreDO">
+		UPDATE SCORE SET character=#{character}, score=#{score} WHERE id=#{id}
+	</update>
+
+	<delete id="deleteScore" parameterType="String">
+		DELETE FROM SCORE WHERE id=#{id}
+	</delete>
+
+</mapper>
